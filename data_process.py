@@ -1,8 +1,32 @@
 import csv
-import json
-import jsonlines
+import argparse
 from tqdm import tqdm
-#5f90538970a38a756834a7eb
+parser = argparse.ArgumentParser()
+parser.add_argument(
+        "-u",
+        type=str,
+        help="Path to users.csv.",
+        required=True,
+    )
+parser.add_argument(
+        "-g",
+        type=str,
+        help="Path to train or val or test groups.csv.",
+        required=True,
+    )
+parser.add_argument(
+        "-s",
+        type=str,
+        help="Path to subgroups.csv.",
+        required=True,
+    )
+parser.add_argument(
+        "-o",
+        type=str,
+        help="Path to output csv file.",
+        required=True,
+    )
+args = parser.parse_args()
 def get_data(path):
     data=[]
     with open(path,'r',encoding='utf-8') as f:
@@ -10,9 +34,9 @@ def get_data(path):
         for d in datas:
             data.append(d)
     return data
-user_path='data/users.csv'
-train_group_path='data/val_unseen_group.csv'
-subgroup_path='data/subgroups.csv'
+user_path=args.u
+train_group_path=args.g
+subgroup_path=args.s
 users=get_data(user_path)
 train_groups=get_data(train_group_path)
 subgroups=get_data(subgroup_path)
@@ -60,7 +84,7 @@ for train_group in train_groups:
 # print(train_groups[2])
 # print(train_groups[3])
 
-with open('processed_val_unseen_group_2.csv','w',encoding='utf-8',newline='') as f:
+with open(args.o,'w',encoding='utf-8',newline='') as f:
     writer=csv.DictWriter(f,fieldnames=list(train_groups[0].keys()))
     writer.writeheader()
     for ele in train_groups:

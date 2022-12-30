@@ -1,5 +1,4 @@
-import json
-import jsonlines
+import argparse
 import csv
 import numpy as np
 import pandas as pd
@@ -11,6 +10,14 @@ from sklearn.metrics import f1_score, roc_auc_score, accuracy_score
 from transformers import EvalPrediction
 import torch
 from tqdm import tqdm
+parser = argparse.ArgumentParser()
+parser.add_argument(
+        "-m",
+        type=str,
+        help="Path to fine tuned model directory.",
+        required=True,
+    )
+args = parser.parse_args()
 
 data_files = {}
 data_files["train"] = 'processed_train_group_2.csv'
@@ -20,7 +27,7 @@ dataset = load_dataset(extension, data_files=data_files)
 labels = [label for label in dataset['train'].features.keys() if label not in ['user_id', 'interests']]
 id2label = {idx:label for idx, label in enumerate(labels)}
 label2id = {label:idx for idx, label in enumerate(labels)}
-tokenizer = AutoTokenizer.from_pretrained("output_dir2")
+tokenizer = AutoTokenizer.from_pretrained(args.m)
 def preprocess_data(examples):
     # take a batch of texts
     text = examples["interests"]
@@ -39,7 +46,7 @@ def preprocess_data(examples):
 
 encoded_dataset = dataset.map(preprocess_data, batched=True, remove_columns=dataset['train'].column_names)
 encoded_dataset.set_format("torch")
-model = AutoModelForSequenceClassification.from_pretrained("output_dir2", 
+model = AutoModelForSequenceClassification.from_pretrained(args.m, 
                                                            problem_type="multi_label_classification", 
                                                            num_labels=len(labels),
                                                            id2label=id2label,
@@ -47,7 +54,7 @@ model = AutoModelForSequenceClassification.from_pretrained("output_dir2",
 batch_size = 4
 metric_name = "f1"
 args = TrainingArguments(
-    f"output_dir2",
+    args.m,
     evaluation_strategy = "epoch",
     save_strategy = "epoch",
     learning_rate=2e-5,
