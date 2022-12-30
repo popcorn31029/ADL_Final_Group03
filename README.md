@@ -2,7 +2,6 @@
 ## Download Model
 ```
 bash download.sh
-
 ```
 ## Data Process
 ```
