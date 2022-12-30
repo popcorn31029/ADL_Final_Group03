@@ -17,7 +17,7 @@ python .\data_process.py -u data/users.csv -g data/val_seen_group.csv -s data/su
 ```
 python .\group.py -m hfl/chinese-roberta-wwm-ext-large -o output_test -t processed_train_group_2.csv -v processed_val_group_2.csv
 ```
-#### -m:                            Path to pretrained model or model identifier from huggingface.co/models.
+#### -m: Path to pretrained model or model identifier from huggingface.co/models.
 #### -o: Path to save model.
 #### -t: Path to processed train file.
 #### -v: Path to processed validate file.
