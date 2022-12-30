@@ -5,7 +5,7 @@ bash download.sh
 ```
 ## Data Process
 ```
-python .\data_process.py -u data/users.csv -g data/val_seen_group.csv -s data/subgroups.csv -o test.csv
+python data_process.py -u data/users.csv -g data/val_seen_group.csv -s data/subgroups.csv -o test.csv
 ```
 #### -u: Path to users.csv.
 #### -g: Path to train or val or test groups.csv.
@@ -14,7 +14,7 @@ python .\data_process.py -u data/users.csv -g data/val_seen_group.csv -s data/su
 
 ## Train & Validation
 ```
-python .\group.py -m hfl/chinese-roberta-wwm-ext-large -o output_test -t processed_train_group_2.csv -v processed_val_group_2.csv
+python group.py -m hfl/chinese-roberta-wwm-ext-large -o output_test -t processed_train_group_2.csv -v processed_val_group_2.csv
 ```
 #### -m: Path to pretrained model or model identifier from huggingface.co/models.
 #### -o: Path to save model.
@@ -27,7 +27,7 @@ python .\group.py -m hfl/chinese-roberta-wwm-ext-large -o output_test -t process
 #### -max_length: Tokenizer's max_length.
 ## Predict
 ```
-python .\predict_group.py -m output_dir2 -t processed_test_group_2.csv -o output_test.csv
+python predict_group.py -m output_dir2 -t processed_test_group_2.csv -o output_test.csv
 ```
 #### -m: Path to fine tuned model directory.
 #### -t: Path to processed test file.
