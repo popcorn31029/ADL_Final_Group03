@@ -20,7 +20,7 @@ def main():
     X = [list(jieba.cut(item)) for item in aspects_df["interests"]]
     X = [" ".join(x) for x in X]
 
-    y = np.load('user_course_matrix.npy')
+    y = np.load('hahow/data/user_course_matrix.npy')
     y = np.asarray([y[i] for i in range(len(y)) if i not in index_na])
     
     # initializing TfidfVectorizer 
