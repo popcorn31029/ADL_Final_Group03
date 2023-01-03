@@ -1,0 +1,5 @@
+pandas
+scikit-learn==0.24.1
+scikit-multilearn
+tqdm
+jieba
