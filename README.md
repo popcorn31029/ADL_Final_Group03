@@ -14,8 +14,8 @@ python data_preprocess.py
 ```
 All the files above are generated beforehand, thus you can skip the step above.
 
-- download user_course_matrix.npy \n
-https://drive.google.com/file/d/1oxCfXnGkSZCy4F9BNiROGRsxVHlNTij5/view?usp=sharing \n
+- download user_course_matrix.npy  
+https://drive.google.com/file/d/1oxCfXnGkSZCy4F9BNiROGRsxVHlNTij5/view?usp=sharing  
 Since the file is too large, please download it from the link and put it at the location that the file configuration instructed.
 
 
